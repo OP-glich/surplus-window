@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1b4536">
+    <title>Donor desk · Surplus Window</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/desk.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header>
+      <div class="wrap bar">
+        <a class="brand" href="/"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Surplus Window</a>
+        <nav>
+          <a href="/">Home</a>
+          <button class="link" id="signout">Sign out</button>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap desk" id="main" data-role="donor">
+      <p class="kicker">Windhoek collection network</p>
+      <div class="heading">
+        <div>
+          <h1>Donor desk</h1>
+          <p id="org">Opening your session…</p>
+        </div>
+        <div class="clock">
+          <small id="clock-label">Collection time</small><strong id="clock">—</strong>
+          <small>Africa/Windhoek</small>
+        </div>
+      </div>
+      <div id="feedback" class="feedback" role="status">
+      </div>
+      <div id="uncertain">
+      </div>
+      <details class="create">
+        <summary>Create a listing</summary>
+        <form id="create" class="fields">
+          <label class="wide">Food description<input name="description" maxlength="160" placeholder="e.g. Mixed sourdough loaves" required></label>
+          <label>Whole quantity<input name="quantity" type="number" min="1" step="1" required></label>
+          <label>Unit<input name="unit" value="portions" maxlength="32" required></label>
+          <label class="wide">Pickup address<input name="address" maxlength="240" required></label>
+          <label>Pickup start · Africa/Windhoek<input type="datetime-local" name="start" required></label>
+          <label>Pickup deadline · Africa/Windhoek<input type="datetime-local" name="end" required></label>
+          <button class="primary">Publish listing</button>
+        </form>
+      </details>
+      <section>
+        <div class="section-head">
+          <h2>Your listings</h2>
+          <small id="count"></small>
+        </div>
+        <div id="listings">
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap bar"><b>Surplus Window</b>
+        <small>Fictional food donation demo · Windhoek, Namibia</small>
+      </div>
+    </footer>
+  </body>
+</html>

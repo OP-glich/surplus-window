@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1b4536">
+    <title>Collection desk · Surplus Window</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/home.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header>
+      <div class="wrap bar">
+        <a class="brand" href="/"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Surplus Window</a>
+        <nav>
+          <a href="#walkthrough">Walkthrough</a>
+          <a class="navbtn" href="#signin">Demo sign-in</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <div class="hero">
+        <section id="signin">
+          <p class="kicker">Windhoek collection network</p>
+          <h1>The collection<br><em>desk.</em></h1>
+          <p class="intro">A local pickup board connecting surplus bakery food with community kitchens in Windhoek.</p>
+          <form id="login">
+            <fieldset>
+              <legend>Choose your role</legend>
+              <div class="segments">
+                <label><input type="radio" name="role" value="donor" checked><span>Food donor</span></label>
+                <label><input type="radio" name="role" value="kitchen"><span>Community kitchen</span></label>
+              </div>
+            </fieldset>
+            <label for="identity">Demo organisation</label>
+            <select id="identity" required>
+              <option value="">Loading identities…</option>
+            </select>
+            <button class="primary" id="enter" disabled>Open donor desk</button>
+          </form>
+          <small>Fictional identities. Each tab has its own sign-in.</small>
+          <div class="feedback" id="feedback" role="status">
+          </div>
+        </section>
+        <figure>
+          <img src="/assets/bakery-crate.jpg" alt="Flour-dusted loaves in a linen-lined wooden crate">
+          <figcaption>
+            <div>
+              <small>Featured donor</small><strong>Sunrise Bakery Demo</strong>
+            </div><span>Windhoek, NA</span>
+          </figcaption>
+        </figure>
+      </div>
+      <section class="guide" id="walkthrough">
+        <div class="section-head">
+          <h2>A pickup, from start to finish</h2>
+          <small>60-second walkthrough</small>
+        </div>
+        <div class="steps">
+          <article><span aria-hidden="true">＋</span>
+            <h3>Reserve 15 portions</h3>
+            <p>Open a second tab as Kula Community Kitchen. Reserve 15 of Sunrise Bakery’s 20 portions.</p>
+          </article>
+          <article><span aria-hidden="true">⇄</span>
+            <h3>Race for the last five</h3>
+            <p>Run the two-kitchen race. Hope Table and Eagle Street each request five portions.</p>
+          </article>
+          <article><span aria-hidden="true">✓</span>
+            <h3>Close the window</h3>
+            <p>As Sunrise Bakery, confirm Kula’s handover. Jump to the deadline in demo mode to see all 20 accounted for.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap bar"><b>Surplus Window</b>
+        <small>Fictional food donation demo · Windhoek, Namibia</small>
+      </div>
+    </footer>
+  </body>
+</html>

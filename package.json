@@ -1,0 +1,22 @@
+{
+  "name": "surplus-window",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local Windhoek food collection desk",
+  "type": "module",
+  "engines": {
+    "node": ">=22.16"
+  },
+  "scripts": {
+    "setup": "node --env-file-if-exists=.env scripts/setup.js",
+    "seed": "node --env-file-if-exists=.env scripts/setup.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "demo": "node --env-file-if-exists=.env src/server.js --demo",
+    "reset:demo": "node scripts/reset-demo.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "13.2.0",
+    "express": "5.1.0"
+  }
+}
