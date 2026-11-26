@@ -183,6 +183,13 @@ async function start() {
     grid.replaceChildren(...metrics.map(([name,n]) => {
       const m = el('div'); m.append(el('strong',String(n)),el('span',name)); return m;
     }));
+    if (role === 'kitchen') {
+      const quantity = card.querySelector('.reserve input');
+      const reserveButton = card.querySelector('.reserve button');
+      quantity.max = String(row.available);
+      reserveButton.disabled = row.available === 0;
+      reserveButton.textContent = row.available === 0 ? 'Fully reserved' : 'Reserve';
+    }
     if (role === 'donor') {
       card.querySelector('.bookings').replaceChildren(el('h3','Reservations'),
         ...(row.reservations.length ? row.reservations.map(h => reservationLine({...h,unit:row.unit},true)) : [el('small','No reservations yet.')]));
