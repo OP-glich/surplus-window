@@ -22,7 +22,7 @@ npm.cmd test
 npm.cmd run demo
 ```
 
-After installing dependencies, double-click **Start Demo.cmd** in the project folder. It starts the demo from the correct folder, waits for the server health check, and opens the app in your default browser. If Windows blocks automatic browser launch, the working URL appears in the launcher window. Keep the server window open while using the app. Closing that window stops the app. If its port is already in use, the launcher displays a message explaining how to choose another `PORT` in `.env` or close the server using that port. It preserves your saved demo database.
+After installing dependencies, double-click **Start App.cmd** for normal operation or **Start Demo.cmd** for the guided walkthrough. Both launchers start from the project folder, wait for their mode's successful health check, and open the working URL in your default browser. If Windows blocks automatic browser launch, the launcher prints the URL. Keep the separate server window open while using the app; closing it stops the app. If the port is occupied, the launcher explains how to choose another `PORT` in `.env` or free the port. Neither launcher resets a database.
 
 Open [the collection desk](http://127.0.0.1:3000/) in two independent browser tabs. Both tabs start at the same home page. Sign in once in each. The specialised pages are [the donor desk](http://127.0.0.1:3000/donor.html) and [the kitchen desk](http://127.0.0.1:3000/kitchen.html). The server binds to IPv4 loopback. To check it from another PowerShell window, run:
 
@@ -48,8 +48,9 @@ Invoke-RestMethod 'http://127.0.0.1:3000/api/health'
 
 ### Normal operation and a fresh demo
 
-- `npm.cmd start` uses real time and `data/surplus.sqlite`. The clock-changing route is disabled. Stop the current server with **Ctrl+C** before switching modes on the same port.
-- `npm.cmd run demo` uses `data/demo.sqlite`. Its clock stays at the displayed time until the donor jumps to a selected listing’s actual deadline. That moves the shared clock forward for every tab and listing. The clock is in SQLite and survives restarts.
+- **Start App.cmd** runs `npm.cmd start`, uses real time and `data/surplus.sqlite`, and requires the health endpoint to report `normal`. The clock-changing route is disabled. Use this for ordinary donor and kitchen workflows.
+- **Start Demo.cmd** runs `npm.cmd run demo` and uses `data/demo.sqlite`. Its clock stays at the displayed time until the donor jumps to a selected listing’s actual deadline. That moves the shared clock forward for every tab and listing. The clock is in SQLite and survives restarts. Use this for the 60-second walkthrough.
+- Both modes default to port 3000. Close the existing server window before starting the other mode on that port, or set a different `PORT` for the next launcher.
 - `npm.cmd run setup` and `npm.cmd run seed` apply outstanding migrations and insert missing fixtures into the normal database. Existing reservations, events and listings survive. Each server also prepares its own selected file on startup.
 - For a fresh demonstration tomorrow, stop the demo, run the two commands below and sign in again. Reset replaces all records **only in the designated demo file** and creates a new 20-portion window.
 
