@@ -1,6 +1,12 @@
 # Surplus Window
 
-A local food-donation desk for a fictional Windhoek bakery and three community kitchens. The bakery lists a pickup window, kitchens hold portions, and the donor confirms the physical handover. The donor’s ledger accounts for every portion when collection ends.
+Bakery food can go to waste when collection teams cannot see what is still available or reserve it in time. Surplus Window is a local coordination app for a fictional Windhoek bakery and three community kitchens. The bakery lists a pickup window, kitchens hold portions, and the donor confirms the physical handover. The donor’s ledger accounts for every portion when collection ends.
+
+It uses Node.js, Express, SQLite through `better-sqlite3`, and plain HTML, CSS and browser JavaScript. The demo includes concurrent HTTP reservations, 30-minute holds, deadline reconciliation, role-scoped access and safe action retries.
+
+![Surplus Window home screen](docs/screenshots/home.png)
+
+![Donor inventory after the demo handover and deadline](docs/screenshots/donor.png)
 
 ## Windows quick start
 
@@ -89,12 +95,12 @@ Donor tab                Kitchen tab
 
 Windows x64 runtime used for this handoff: Node **26.13.0**, npm **11.20.0**, Express **5.1.0** and Google Chrome **157.0.8103.79**. The lockfile pins **better-sqlite3 13.2.0** and its **node-addon-api 8.5.0** dependency.
 
-The sandbox blocked the missing native package download. **The native driver load and full test run with that driver are pending.** The PowerShell quick start above checks both explicitly. A separate diagnostic run used Node’s bundled SQLite **3.54.0** with real database files. It passed **21 of 21** tests. The application source imports `better-sqlite3` for normal launches.
+On Windows, the installed `better-sqlite3` driver loaded successfully with SQLite **3.54.1**. `npm.cmd run setup` succeeded and `npm.cmd test` passed **21 of 21** tests with the native driver. The demo server launched with `PORT=3002` because another local process occupied port 3000.
 
 The tests cover the repeated HTTP race, stock and ledger totals, cancellation, exact start/expiry/deadline boundaries, closing with zero or mixed stock, startup and periodic sweeps, restart equivalence, rollback on an injected write failure, response replay, changed ownership, cross-organisation requests, invalid quantities, setup preservation and mode permissions. The race measures simultaneous requests to one HTTP server. Independent-connection lock contention was outside that test.
 
 A separate Windows Chrome walkthrough exercised two tabs, verified that a typed quantity survived polling, and ran the race on an isolated database. Hope Table received 201, Eagle Street received 409, and the donor’s final balance was **0 available, 0 held, 15 collected, 5 written off**. The kitchen view also fit a 390-pixel viewport. Its test records were isolated from the fresh handoff listing. All execution checks took place on Windows.
 
-The current machine also has an isolated diagnostic [local preview](http://127.0.0.1:3001/) and [health endpoint](http://127.0.0.1:3001/api/health). It uses the bundled SQLite driver and a separate ignored preview file. The normal and demo launch commands above both use the requested native driver on port 3000.
+The demo command uses the native driver. Port 3000 is the default. Set `$env:PORT='3002'` in PowerShell before `npm.cmd run demo` when port 3000 is occupied.
 
 The bread photograph is an original AI-generated project asset stored in `public/assets/`.
