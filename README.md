@@ -22,6 +22,8 @@ npm.cmd test
 npm.cmd run demo
 ```
 
+After installing dependencies, double-click **Start Demo.cmd** in the project folder. It starts the demo from the correct folder, waits for the server health check, and opens the app in your default browser. If Windows blocks automatic browser launch, the working URL appears in the launcher window. Keep the server window open while using the app. Closing that window stops the app. If its port is already in use, the launcher displays a message explaining how to choose another `PORT` in `.env` or close the server using that port. It preserves your saved demo database.
+
 Open [the collection desk](http://127.0.0.1:3000/) in two independent browser tabs. Both tabs start at the same home page. Sign in once in each. The specialised pages are [the donor desk](http://127.0.0.1:3000/donor.html) and [the kitchen desk](http://127.0.0.1:3000/kitchen.html). The server binds to IPv4 loopback. To check it from another PowerShell window, run:
 
 ```powershell
