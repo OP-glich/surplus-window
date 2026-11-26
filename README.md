@@ -10,10 +10,11 @@ It uses Node.js, Express, SQLite through `better-sqlite3`, and plain HTML, CSS a
 
 ## Windows quick start
 
-Run in PowerShell. The project contains the frontend, API, migrations and fixtures. Dependency installation is the only step that needs internet access.
+Run in PowerShell with Node.js 22.16 or newer. Clone the repository, then install dependencies. The project contains the frontend, API, migrations and fixtures. Cloning and dependency installation need internet access.
 
 ```powershell
-Set-Location 'C:\Users\octav\Documents\surplus-window'
+git clone https://github.com/OP-glich/surplus-window.git
+Set-Location .\surplus-window
 npm.cmd ci
 node -e "const Database=require('better-sqlite3'); const db=new Database(':memory:'); console.log('SQLite',db.prepare('SELECT sqlite_version() AS version').get().version); db.close()"
 npm.cmd run setup
