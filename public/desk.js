@@ -89,6 +89,7 @@ async function start() {
     ++generation;
     save(intent);
     toggleButtons(true);
+    feedback(intent.race ? 'Sending both kitchen requests…' : intent.label + '…');
     try {
       let message = intent.success;
       if (intent.race) message = await runRace(intent);
