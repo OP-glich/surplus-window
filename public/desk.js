@@ -28,6 +28,7 @@ async function start() {
   let generation = 0;
   let lastHolds = '';
   let latest;
+  let suggestedPickupTimes = false;
   const button = (label, fn, cls='secondary') => {
     const b = el('button', label, cls);
     b.type = 'button';
@@ -205,6 +206,13 @@ async function start() {
       const [board, holds] = await Promise.all([api('/listings'), role==='kitchen' ? api('/reservations') : null]);
       if (pass !== generation || busy) return;
       latest = board.data;
+      if (role === 'donor' && !suggestedPickupTimes) {
+        const form = document.querySelector('#create');
+        const windhoekInput = time => new Date(time + 2 * 60 * 60_000).toISOString().slice(0, 16);
+        if (!form.elements.start.value) form.elements.start.value = windhoekInput(latest.now - 60_000);
+        if (!form.elements.end.value) form.elements.end.value = windhoekInput(latest.now + 2 * 60 * 60_000);
+        suggestedPickupTimes = true;
+      }
       document.querySelector('#clock-label').textContent = latest.demo ? 'Demo clock' : 'Local time';
       document.querySelector('#clock').textContent = stamp(latest.now);
       document.querySelector('#count').textContent = latest.listings.length + (latest.listings.length === 1 ? ' listing' : ' listings');
@@ -229,9 +237,16 @@ async function start() {
     form.onsubmit = e => {
       e.preventDefault();
       const f = new FormData(form);
+      const start = Date.parse(f.get('start') + '+02:00');
+      const end = Date.parse(f.get('end') + '+02:00');
+      if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start || end <= latest.now) {
+        feedback('Choose a pickup deadline after the start and the current collection time.', true);
+        form.elements.end.focus();
+        return;
+      }
       // Contemporary Windhoek pickup dates use UTC+02:00 regardless of the browser's own zone.
       mutation('/listings',{ description:f.get('description'),unit:f.get('unit'),quantity:Number(f.get('quantity')),
-        address:f.get('address'),pickup_start:Date.parse(f.get('start') + '+02:00'),pickup_end:Date.parse(f.get('end') + '+02:00') },
+        address:f.get('address'),pickup_start:start,pickup_end:end },
       'Publish listing','Listing published.');
     };
   }
